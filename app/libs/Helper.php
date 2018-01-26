@@ -20,4 +20,12 @@ class Helper{
         $text2url = str_replace(' ','-',trim($text2url));
         return $text2url;
     }
+    
+    public static function renderHTMLtoRichtext($descripcion){
+        $contenido_html = str_replace('</p>', '</p><br>', $descripcion);
+        $contenido_html = str_replace('strong', 'b', $contenido_html);
+        $wizard = new PHPExcel_Helper_HTML;
+        $richText = $wizard->toRichTextObject(mb_convert_encoding(html_entity_decode($contenido_html), 'HTML-ENTITIES', 'UTF-8'));
+        return $richText;
+    }
 }
