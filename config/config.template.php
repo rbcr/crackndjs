@@ -11,13 +11,19 @@ define('DEBUG', true);
 /**
  * Definición del entorno de desarrollo
  */
-define('ENVIROMENT', 'DEV');
+define('ENVIROMENT', 'LOCAL');
 /**
  * Detección del host y de la URL Absoluta del proyecto
  */
 define('URL_PROTOCOL', 'http://');
 define('URL_DOMAIN', $_SERVER['HTTP_HOST']);
 switch (ENVIROMENT) {
+    case 'LOCAL':
+        define('URL_SUB_FOLDER', dirname($_SERVER['SCRIPT_NAME']));
+        define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER . DIRECTORY_SEPARATOR);
+        define('URL_ROOT', $_SERVER['DOCUMENT_ROOT'] . URL_SUB_FOLDER . DIRECTORY_SEPARATOR);
+        break;
+
     case 'DEV':
         define('URL_SUB_FOLDER', str_replace('//', '/', dirname($_SERVER['SCRIPT_NAME'])));
         define('URL', URL_PROTOCOL . URL_DOMAIN . DIRECTORY_SEPARATOR . URL_SUB_FOLDER . DIRECTORY_SEPARATOR);
@@ -28,12 +34,6 @@ switch (ENVIROMENT) {
         define('URL_SUB_FOLDER', str_replace('/', '', dirname($_SERVER['SCRIPT_NAME'])));
         define('URL', URL_PROTOCOL . URL_DOMAIN . DIRECTORY_SEPARATOR . URL_SUB_FOLDER);
         define('URL_ROOT', $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . URL_SUB_FOLDER);
-        break;
-
-    default:
-        define('URL_SUB_FOLDER', str_replace('//', '/', dirname($_SERVER['SCRIPT_NAME'])));
-        define('URL', URL_PROTOCOL . URL_DOMAIN . DIRECTORY_SEPARATOR . URL_SUB_FOLDER . DIRECTORY_SEPARATOR);
-        define('URL_ROOT', $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . URL_SUB_FOLDER . DIRECTORY_SEPARATOR);
         break;
 }
 /**
@@ -87,12 +87,20 @@ define('FILES_DIRECTORY', URL.'app/files/');
  * En esta función se utiliza Eloquent en la v5.1 como ORM (illuminate/database) y esta definido por defecto en el archivo composer.json
  */
 switch (ENVIROMENT) {
-    case 'DEV':
+    case 'LOCAL':
         define('DB_TYPE', 'mysql');
         define('DB_HOST', 'localhost');
         define('DB_USER', 'root');
         define('DB_PASS', 'toor');
         define('DB_NAME', 'db');
+        break;
+
+    case 'DEV':
+        define('DB_TYPE', 'mysql');
+        define('DB_HOST', '');
+        define('DB_USER', '');
+        define('DB_PASS', '');
+        define('DB_NAME', '');
         break;
 
     case 'PROD':
@@ -101,14 +109,6 @@ switch (ENVIROMENT) {
         define('DB_USER', '');
         define('DB_PASS', '');
         define('DB_NAME', '');
-        break;
-
-    default:
-        define('DB_TYPE', 'mysql');
-        define('DB_HOST', 'localhost');
-        define('DB_NAME', 'testing');
-        define('DB_USER', 'root');
-        define('DB_PASS', 'toor');
         break;
 }
 

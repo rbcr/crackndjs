@@ -1,4 +1,4 @@
 <?php
 class Usuarios extends Model {
-    public $table = "users";
+    protected $table = "users";
 }

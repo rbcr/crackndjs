@@ -1,7 +1,7 @@
 Options -MultiViews
 RewriteEngine On
 Options -Indexes
-RewriteBase /mvc/
+RewriteBase /stallion/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
