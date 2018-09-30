@@ -3,6 +3,7 @@
         "illuminate/database":"5.4.*",
         "illuminate/events":"5.4.*",
         "illuminate/pagination":"5.4.*",
-        "sendgrid/sendgrid": "4.0.*"
+        "sendgrid/sendgrid": "4.0.*",
+        "robmorgan/phinx": "^0.10.6"
     }
 }
