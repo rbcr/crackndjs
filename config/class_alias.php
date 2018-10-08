@@ -5,3 +5,4 @@
 	class_alias('Illuminate\Database\Eloquent\Model', 'Model');
 	class_alias('Illuminate\Database\Capsule\Manager', 'DB');
 	class_alias('Carbon\Carbon', 'Carbon');
+    class_alias('Cartalyst\Sentinel\Native\Facades\Sentinel', 'Sentinel');
