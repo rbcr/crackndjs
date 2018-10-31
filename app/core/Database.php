@@ -21,3 +21,5 @@
 	$capsule->setAsGlobal();
 
 	$capsule->bootEloquent();
+
+    DB::connection()->enableQueryLog();
