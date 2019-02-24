@@ -6,6 +6,7 @@
         "sendgrid/sendgrid": "4.0.*",
         "cartalyst/sentinel": "^2.0",
         "symfony/http-foundation": "^3.1",
-        "robmorgan/phinx": "^0.10.6"
+        "robmorgan/phinx": "^0.10.6",
+        "nikic/fast-route": "^1.3"
     }
 }
