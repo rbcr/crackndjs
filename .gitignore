@@ -1,3 +1,4 @@
+!/app/files/db/phinxlog.sql
 /config/config.php
 .idea
 composer.phar
