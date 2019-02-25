@@ -37,7 +37,7 @@ class DeployController extends Controller {
         echo json_encode($response);
     }
 
-    public function db(){
+    public function db($command){
         $app = new Phinx\Console\PhinxApplication();
         $wrap = new Phinx\Wrapper\TextWrapper($app);
 

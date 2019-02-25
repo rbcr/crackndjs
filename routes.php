@@ -1,5 +1,6 @@
 <?php
     $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+        $r->addRoute('GET', '/deploy/init', 'DeployController@init');
         $r->addRoute('GET', '/', 'DefaultController@index');
     });
 
