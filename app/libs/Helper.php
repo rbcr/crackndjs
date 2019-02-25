@@ -33,7 +33,7 @@ class Helper{
             'ÿ'=>'y', 'Ŕ'=>'R', 'ŕ'=>'r', ' ' => '-', '/' => ''
         );
         $text2url = strtolower(strtr($str, $table));
-        $text2url = preg_replace('#[^0-9a-z\/^.]+#i', " ", $text2url);
+        $text2url = preg_replace('#[^_0-9a-z\/^.]+#i', " ", $text2url);
         $text2url = str_replace(' ','-',trim($text2url));
         return $text2url;
     }
