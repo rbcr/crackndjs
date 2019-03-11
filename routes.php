@@ -1,5 +1,6 @@
 <?php
     $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+        //$r->addRoute('GET', '/deploy/init', 'DeployController@index');
         $r->addRoute('GET', '/', 'DefaultController@index');
     });
 
@@ -11,7 +12,7 @@
     }
 
     $uri = rawurldecode($uri);
-    $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+    $routeInfo = $dispatcher->dispatch($httpMethod, (ENVIROMENT === 'LOCAL') ? URL_SUB_FOLDER . $uri : $uri);
 
     switch ($routeInfo[0]) {
         case FastRoute\Dispatcher::NOT_FOUND:
