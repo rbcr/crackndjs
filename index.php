@@ -1,28 +1,34 @@
 <?php
+    ini_set('display_errors', 1);
     try{
-        if (file_exists('vendor/autoload.php')) {
+        define('APP', 'app/');
+        define('MODEL', 'app/model');
+
+        if (file_exists('vendor/autoload.php'))
             require 'vendor/autoload.php';
+
+        require 'Cracknd/Core.php';
+        $cracknd = new Cracknd\Core();
+        $files = ['config/config.php',
+                    'config/class_alias.php',
+                    APP . 'libs/Helper.php',
+                    APP . 'core/Core.php',
+                    APP . 'core/Controller.php',
+                    APP . 'core/Database.php',
+                    APP . 'core/View.php'];
+        foreach ($files as $file){
+            $cracknd->load_file($file);
         }
 
-        define('APP', 'app/');
-        define('MODEL', 'app/model/');
-
         spl_autoload_register(function ($class) {
-            $file = MODEL .$class.'.php';
-            if (file_exists($file)) {
+            $file = MODEL . "/$class.php";
+            if (file_exists($file))
                 require_once $file;
-            }
         });
 
-        require 'config/config.php';
-        require 'config/class_alias.php';
-        require APP . 'libs/Helper.php';
-        require APP . 'core/Core.php';
-        require APP . 'core/Controller.php';
-        require APP . 'core/Database.php';
-        require APP . 'core/View.php';
-        require 'routes.php';
+        $cracknd->enable_routes(true);
+
     } catch (Exception $ex){
-        echo $ex->getMessage();
         header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+        echo $ex->getMessage();
     }
