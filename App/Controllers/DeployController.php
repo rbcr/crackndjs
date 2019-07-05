@@ -1,24 +1,29 @@
 <?php
-class DeployController extends Controller {
+namespace App\Controllers;
+
+use \Cartalyst\Sentinel\Native\Facades\Sentinel;
+use \Illuminate\Database\Capsule\Manager AS DB;
+
+class DeployController{
     public function index(){
-        
+
     }
 
     public function init(){
         switch (ENVIROMENT){
             case "LOCAL":
             case "DEV":
-                $sql_file = URL_ROOT . 'vendor/cartalyst/sentinel/schema/mysql.sql';
-                if(file_exists($sql_file)){
-                    $phinx_file = URL_ROOT . 'app/files/db/phinxlog.sql';
+                $sql_file = root_path('vendor/cartalyst/sentinel/schema/mysql.sql');
+                if(file_exists($sql_file)) {
+                    $phinx_file = root_path('storage/files/db/phinxlog.sql');
                     DB::unprepared(file_get_contents($phinx_file));
                     DB::unprepared(file_get_contents($sql_file));
                     $roles = ['Admin'];
                     foreach ($roles as $role){
-                        $rol = new Role();
-                        $rol->slug = Helper::to_slug($role);
+                        $rol = new \Models\Role();
+                        $rol->slug = \Cracknd\Strings::to_slug($role);
                         $rol->name = $role;
-                        $rol->permissions = '{"' . Helper::to_slug($role) . '":true}';
+                        $rol->permissions = '{"' . \Cracknd\Strings::to_slug($role) . '":true}';
                         $rol->save();
                     }
                     $credentials = ['email' => 'admin@robsaurus.me', 'password'  => '12345678'];
@@ -34,12 +39,12 @@ class DeployController extends Controller {
                 $response = ['status' => false, 'message' => 'Entorno no válido'];
                 break;
         }
-        echo json_encode($response);
+        return json_encode($response);
     }
 
     public function db($command){
-        $app = new Phinx\Console\PhinxApplication();
-        $wrap = new Phinx\Wrapper\TextWrapper($app);
+        $app = new \Phinx\Console\PhinxApplication();
+        $wrap = new \Phinx\Wrapper\TextWrapper($app);
 
         $routes = [
             'status' => 'getStatus',
@@ -55,6 +60,6 @@ class DeployController extends Controller {
 
         header('Content-Type: text/plain', true, $error ? 500 : 200);
 
-        echo "<pre>$output</pre>";
+        return "<pre>$output</pre>";
     }
 }

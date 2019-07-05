@@ -1,5 +1,8 @@
-!/app/files/db/phinxlog.sql
+/logs
 /config/config.php
 .idea
 composer.phar
 phinx.yml
+composer.lock
+/* Exceptions */
+!/storage/files/db/phinxlog.sql
