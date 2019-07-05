@@ -30,7 +30,7 @@ class DeployController{
                     $usuario = Sentinel::registerAndActivate($credentials);
                     $role = Sentinel::findRoleBySlug('admin');
                     $role->users()->attach($usuario);
-                    $response = ['status' => true, 'message' => 'Se ha instalado y configurado correctamente los roles de usuario, usuario default: admin@robsaurus.me'];
+                    $response = ['status' => true, 'message' => 'Se ha instalado y configurado correctamente los roles de usuario, usuario default: admin@robsaurus.me, password: 12345678'];
                 } else
                     $response = ['status' => false, 'message' => 'Error, no se encuentra instalado el paquete cartalyst/sentinel'];
                 BREAK;

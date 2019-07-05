@@ -2,13 +2,9 @@
 namespace Cracknd;
 
 class Files{
-    public static function root_path($path){
-        return URL_ROOT . $path;
-    }
-
     public static function copy_file($source_file, $destiny_directory = null, $rename = false, $absolute_name = true, $custom_directory = false){
         try{
-            $root_directory = URL_ROOT . 'app/files';
+            $root_directory = root_path('app/files');
             $source_info = pathinfo($source_file);
             if($rename){
                 $destiny_directory .= "/$rename." . $source_info['extension'];

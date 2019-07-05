@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 class DefaultController{
     public function index(){
-        return "Index Default";
+        $usuarios = \Models\User::where('id', '>', 0)->get();
+        return json_encode($usuarios);
     }
 }

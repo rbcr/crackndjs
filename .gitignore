@@ -4,5 +4,3 @@
 composer.phar
 phinx.yml
 composer.lock
-/* Exceptions */
-!/storage/files/db/phinxlog.sql
