@@ -32,4 +32,8 @@ class Database{
         return $capsule;
 
     }
+
+    public static function getLogQuerys(){
+        return DB::getQueryLog();
+    }
 }
