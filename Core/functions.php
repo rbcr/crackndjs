@@ -14,3 +14,7 @@
     function root_path($file){
         return URL_ROOT . $file;
     }
+
+    function storage_path($file = null){
+        return URL_ROOT . "storage/$file";
+    }
