@@ -25,7 +25,16 @@
             break;
     }
 
-    define('DATABASE_ENABLED', true);
+    define('RACKSPACE_UPLOAD_ENABLED', false);
+    define('RACKSPACE_USER', '');
+    define('RACKSPACE_KEY', '');
+    define('RACKSPACE_REGION', '');
+    define('RACKSPACE_CONTAINER', '');
+    define('RACKSPACE_FOLDER', '');
+    define('RACKSPACE_CDN', '');
+
+
+define('DATABASE_ENABLED', true);
     define('MULTIPLE_DATABASES', false);
 
     if(DATABASE_ENABLED){

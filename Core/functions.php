@@ -7,6 +7,10 @@
         return ASSET_DIRECTORY . $asset;
     }
 
+    function image($image_path){
+        return ASSET_DIRECTORY . "img/$image_path";
+    }
+
     function redirect($url){
         header('location:' . URL . $url);
     }
