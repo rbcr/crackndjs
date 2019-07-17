@@ -34,7 +34,7 @@
     define('RACKSPACE_CDN', '');
 
 
-define('DATABASE_ENABLED', true);
+    define('DATABASE_ENABLED', true);
     define('MULTIPLE_DATABASES', false);
 
     if(DATABASE_ENABLED){

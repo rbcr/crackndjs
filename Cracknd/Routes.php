@@ -20,7 +20,7 @@ class Routes{
         }
 
         $uri = rawurldecode($uri);
-        $routeInfo = $this->dispatcher->dispatch($httpMethod, (ENVIROMENT === 'LOCAL') ? URL_SUB_FOLDER . $uri : $uri);
+        $routeInfo = $this->dispatcher->dispatch($httpMethod, (ENVIROMENT === 'LOCAL') ? str_replace(URL_SUB_FOLDER, '', $uri) : $uri);
 
         switch ($routeInfo[0]) {
             case \FastRoute\Dispatcher::NOT_FOUND:
