@@ -24,12 +24,12 @@ class Routes{
 
         switch ($routeInfo[0]) {
             case \FastRoute\Dispatcher::NOT_FOUND:
-                $respose = View::render('404');
+                $response = View::render('404');
                 break;
 
             case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
                 $allowedMethods = $routeInfo[1];
-                $respose = 'no allowed';
+                $response = 'no allowed';
                 break;
 
             case \FastRoute\Dispatcher::FOUND:
@@ -37,10 +37,10 @@ class Routes{
                 $vars = $routeInfo[2];
                 list($class, $method) = explode("@", $handler, 2);
                 $class = "App\\Controllers\\$class";
-                $respose = call_user_func_array(array(new $class, $method), $vars);
+                $response = call_user_func_array(array(new $class, $method), $vars);
                 break;
         }
 
-        return $respose;
+        return $response;
     }
 }
