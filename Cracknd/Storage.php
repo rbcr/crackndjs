@@ -74,7 +74,16 @@ class Storage{
         }
     }
 
-    public static function get_human_redeable_size($bytes, $decimals){
+    public static function get_dir_contents($path){
+        $rii = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
+        $files = array();
+        foreach ($rii as $file)
+            if (!$file->isDir())
+                $files[] = $file->getPathname();
+        return $files;
+    }
+
+    public static function get_human_readable_size($bytes, $decimals){
         $size = array('B','KB','MB','GB','TB','PB','EB','ZB','YB');
         $factor = floor((strlen($bytes) - 1) / 3);
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
