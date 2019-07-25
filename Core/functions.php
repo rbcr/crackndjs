@@ -15,7 +15,7 @@
         header('location:' . URL . $url);
     }
 
-    function root_path($file){
+    function root_path($file = null){
         return URL_ROOT . $file;
     }
 

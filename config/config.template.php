@@ -3,12 +3,12 @@
     date_default_timezone_set('America/Mexico_City');
 
     define('DEBUG', false);
-    define('ENVIROMENT', 'DEV');
+    define('ENVIRONMENT', 'DEV');
     define('ROUTING_ENABLED', true);
 
     define('URL_PROTOCOL', 'http://');
     define('URL_DOMAIN', $_SERVER['HTTP_HOST']);
-    switch (ENVIROMENT) {
+    switch (ENVIRONMENT) {
         case 'LOCAL':
             define('URL_SUB_FOLDER', dirname($_SERVER['SCRIPT_NAME']));
             define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER . DIRECTORY_SEPARATOR);
@@ -25,6 +25,8 @@
             break;
     }
 
+    define('ASSET_DIRECTORY', URL . 'public/');
+
     define('RACKSPACE_UPLOAD_ENABLED', false);
     define('RACKSPACE_USER', '');
     define('RACKSPACE_KEY', '');
@@ -32,7 +34,6 @@
     define('RACKSPACE_CONTAINER', '');
     define('RACKSPACE_FOLDER', '');
     define('RACKSPACE_CDN', '');
-
 
     define('DATABASE_ENABLED', true);
     define('MULTIPLE_DATABASES', false);
