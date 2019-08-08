@@ -40,7 +40,7 @@
 
     if(DATABASE_ENABLED){
         $connections = [];
-        switch (ENVIROMENT) {
+        switch (ENVIRONMENT) {
             case 'LOCAL':
             case 'DEV':
                 $connections[] = [

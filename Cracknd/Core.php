@@ -1,8 +1,6 @@
 <?php
 namespace Cracknd;
 
-use Cracknd\Files;
-
 class Core{
     public function __construct(){
         spl_autoload_register(function ($class) {
