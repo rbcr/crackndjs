@@ -9,7 +9,7 @@
         "illuminate/pagination":"5.8.*",
         "illuminate/cache":"5.8.*",
         "illuminate/filesystem":"5.8.*",
-        "sendgrid/sendgrid": "4.0.*",
+        "sendgrid/sendgrid": "^7.3",
         "cartalyst/sentinel": "^2.0",
         "symfony/http-foundation": "^3.1",
         "robmorgan/phinx": "^0.10.6",

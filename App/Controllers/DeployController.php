@@ -10,7 +10,7 @@ class DeployController{
     }
 
     public function init(){
-        switch (ENVIROMENT){
+        switch (ENVIRONMENT){
             case "LOCAL":
             case "DEV":
                 $sql_file = root_path('vendor/cartalyst/sentinel/schema/mysql.sql');

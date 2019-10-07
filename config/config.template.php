@@ -35,6 +35,11 @@
     define('RACKSPACE_FOLDER', '');
     define('RACKSPACE_CDN', '');
 
+    define('SENDGRID_ENABLED', false);
+    define('SENDGRID_FROM_EMAIL', '');
+    define('SENDGRID_FROM_NAME', '');
+    define('SENDGRID_API_KEY', '');
+
     define('DATABASE_ENABLED', true);
     define('MULTIPLE_DATABASES', false);
 

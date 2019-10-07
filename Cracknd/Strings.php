@@ -19,4 +19,12 @@ class Strings{
         $text2url = str_replace('.','',trim($text2url));
         return $text2url;
     }
+
+    public static function to_currency($number){
+        return '$ ' . number_format($number, 2, '.', ',');
+    }
+
+    public static function to_number($number){
+        return number_format($number, 2, '.', ',');
+    }
 }
