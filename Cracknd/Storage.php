@@ -59,14 +59,14 @@ class Storage{
             if(!is_dir("$uploads_directory/$nuevo_directorio"))
                 mkdir("$uploads_directory/$nuevo_directorio", 0777, true);
             $file_info = pathinfo("$directorio_actual/$archivo");
-            $filename = $file_info['basename'];
-            copy("$directorio_actual/$filename", "$directorio_actual/" . $strings->to_slug(html_entity_decode($file_info['filename'])) . '.' . $file_info['extension']);
+            $filename = $file_info['filename'];
             $filename =  $strings->to_slug(html_entity_decode($filename));
             if(!empty($rename_file)){
                 $new_filename = $rename_file . '.' . $file_info['extension'];
                 copy("$directorio_actual/$filename", "$uploads_directory/$nuevo_directorio/$new_filename");
                 return $new_filename;
             } else {
+                $filename = $filename . '.'. $file_info['extension'];
                 copy("$directorio_actual/$filename", "$uploads_directory/$nuevo_directorio/$filename");
                 return $filename;
             }
@@ -81,15 +81,13 @@ class Storage{
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 
-    public function upload_to_cdn($archivo, $directorio, $inUploadsFolder = true, $contentType = null, $returnBasenameOnly = false, $returnPublicUrl = false, $dropLocalFile = true){
+    public function upload_to_cdn($archivo, $directorio, $inUploadsFolder = true, $metadata = null, $returnBasenameOnly = false, $returnPublicUrl = false, $dropLocalFile = true){
         $localFileName  = ($inUploadsFolder) ? storage_path("uploads/$directorio/$archivo") : storage_path("$directorio/$archivo");
         $remoteFileName = RACKSPACE_FOLDER . "$directorio/$archivo";
-        $metadata = ['Access-Control-Allow-Origin' => '*'];
-        $metadataHeaders = DataObject::stockHeaders($metadata);
-        if(!empty($contentType))
-            $allHttpHeaders = ['Content-Type' => $contentType] + $metadataHeaders;
-        else
-            $allHttpHeaders = $metadataHeaders;
+        $stockHeaders = DataObject::stockHeaders(['Access-Control-Allow-Origin' => '*']);
+        if(!empty($metadata))
+            $stockHeaders = $metadata + $stockHeaders;
+        $allHttpHeaders = $stockHeaders;
 
         $handle = fopen($localFileName, 'r');
         $this->container->uploadObject($remoteFileName, $handle, $allHttpHeaders);
