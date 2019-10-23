@@ -35,6 +35,9 @@
     define('RACKSPACE_FOLDER', '');
     define('RACKSPACE_CDN', '');
 
+    define('TINIFY_ENABLE_OPTIMIZATION', false);
+    define('TINIFY_API_KEY', '');
+
     define('SENDGRID_ENABLED', false);
     define('SENDGRID_FROM_EMAIL', '');
     define('SENDGRID_FROM_NAME', '');
@@ -52,7 +55,7 @@
                     'name' => 'default',
                     'type' => 'mysql',
                     'host' => 'localhost',
-                    'user' => 'user',
+                    'user' => 'root',
                     'password' => 'toor',
                     'db' => 'db_cracknd',
                     'prefix' => null,
