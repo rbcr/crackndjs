@@ -76,7 +76,7 @@ let Cracknd = {
                             },
                             function(isConfirm){
                                 if(isConfirm) {
-                                    callback();
+                                    callback(data);
                                 }
                             });
                         } else {
