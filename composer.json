@@ -2,6 +2,7 @@
     "name": "cracknd/cracknd",
     "license": "Apache Software License",
     "type": "project",
+    "version": "3.0.4",
     "require": {
         "php": ">=7.1.3",
         "illuminate/database":"5.8.*",
