@@ -15,7 +15,7 @@ class DeployController{
             case "DEV":
                 $sql_file = root_path('vendor/cartalyst/sentinel/schema/mysql.sql');
                 if(file_exists($sql_file)) {
-                    $phinx_file = root_path('storage/files/db/phinxlog.sql');
+                    $phinx_file = root_path('storage/db/phinxlog.sql');
                     DB::unprepared(file_get_contents($phinx_file));
                     DB::unprepared(file_get_contents($sql_file));
                     $roles = ['Admin'];
