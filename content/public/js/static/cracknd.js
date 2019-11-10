@@ -90,9 +90,18 @@ let Cracknd = {
     },
     Datatables: {
         options: function() {
-            return {bStateSave: true, autoWidth: true, processing: true, serverSide: true}
+            return {
+                bStateSave: true,
+                autoWidth: true,
+                processing: true,
+                serverSide: true,
+                paging: true,
+                ordering:  true,
+                lengthMenu: true,
+                lengthChange: true
+            }
         },
-        render: function (table, route, options) {
+        render: function (table, route, options, data = null) {
             let headers = Cracknd.Datatables.getResponsiveHeaders(table);
             if(options.serverSide)
                 return table.DataTable({
@@ -100,6 +109,10 @@ let Cracknd = {
                     "autoWidth": options.autoWidth,
                     "processing": options.processing,
                     "serverSide": options.serverSide,
+                    "paging": options.paging,
+                    "ordering": options.ordering,
+                    "lengthMenu": options.lengthMenu,
+                    "lengthChange": options.lengthChange,
                     "ajax": {
                         "url": BASEURL + route, "type": "POST", "dataType": "JSON",
                         "data": function ( d )  {
@@ -109,6 +122,10 @@ let Cracknd = {
                                 let name = $(input).attr('name');
                                 obj[name] = $(input).val();
                             });
+
+                            if(data !== null)
+                                obj = {...obj, ...data};
+
                             return $.extend({}, d, obj);
                         }
                     },
