@@ -60,13 +60,12 @@ class Storage{
                 mkdir("$uploads_directory/$nuevo_directorio", 0777, true);
             $file_info = pathinfo("$directorio_actual/$archivo");
             $filename = $file_info['filename'];
-            $filename =  $strings->to_slug(html_entity_decode($filename));
+            $filename =  $strings->to_slug(html_entity_decode($filename)) . '.' . $file_info['extension'];
             if(!empty($rename_file)){
                 $new_filename = $rename_file . '.' . $file_info['extension'];
                 copy("$directorio_actual/$filename", "$uploads_directory/$nuevo_directorio/$new_filename");
                 return $new_filename;
             } else {
-                $filename = $filename . '.'. $file_info['extension'];
                 copy("$directorio_actual/$filename", "$uploads_directory/$nuevo_directorio/$filename");
                 return $filename;
             }
