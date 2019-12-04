@@ -21,8 +21,12 @@ class Utils{
                     $email->setFrom($from['email'], $from['name']);
                 else
                     $email->setFrom(SENDGRID_FROM_EMAIL, SENDGRID_FROM_NAME);
-                foreach ($emails_to as $to)
-                    $email->addTo($to);
+                if(!SENDGRID_DEBUG)
+                    foreach ($emails_to as $to)
+                        $email->addTo($to);
+                else
+                    foreach (SENDIGRD_DEBUG_EMAILS as $to)
+                        $email->addTo($to);
                 foreach ($emails_cc as $cc)
                     $email->addCc($cc);
                 foreach ($emails_bcc as $bcc)

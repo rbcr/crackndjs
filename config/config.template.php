@@ -39,6 +39,8 @@
     define('TINIFY_API_KEY', '');
 
     define('SENDGRID_ENABLED', false);
+    define('SENDGRID_DEBUG', false);
+    define('SENDIGRD_DEBUG_EMAILS', []);
     define('SENDGRID_FROM_EMAIL', '');
     define('SENDGRID_FROM_NAME', '');
     define('SENDGRID_API_KEY', '');
