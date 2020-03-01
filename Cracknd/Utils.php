@@ -39,6 +39,16 @@ class Utils{
 
                 $email->setSubject($subject);
                 $email->addContent('text/html', $template_html);
+
+                foreach ($attachments as $attachment){
+                    $attch = new Attachment();
+                    $attch->setContent(file_get_contents($attachment['path']));
+                    $attch->setType($attachment['type']);
+                    $attch->setFilename($attachment['basename']);
+                    $attch->setDisposition("attachment");
+                    $email->addAttachment($attch);
+                }
+
                 $response = $sendgrid->send($email);
                 return ['status' => true, 'message' => $response];
             } else

@@ -30,22 +30,30 @@ let Cracknd = {
                 }
             });
         },
-        LoadOptions: function (selector, route, data) {
-            let preloaded_id = selector.data('id');
+        LoadOptions: function (selector, route, data = {}, preloaded_id = 0) {
+            let isMultiple = selector.prop('multiple');
             selector.attr('disabled', 'disabled');
             Cracknd.Ajax.init(route, data, 'POST').then(response => {
-               let data = $.parseJSON(response);
-               let options = '<option value="">- Seleccionar opcion -</option>';
-               if(data.status){
-                   $.each(data.data, function (i, option) {
-                       if(parseInt(option.id) === parseInt(preloaded_id))
-                           options += `<option value="${option.id}" selected>${option.nombre}</option>`;
-                       else
-                           options += `<option value="${option.id}">${option.nombre}</option>`;
-                   });
-               }
-               selector.html(options);
-               selector.removeAttr('disabled');
+                let data = $.parseJSON(response);
+                let options = '<option value="">- Seleccionar opcion -</option>';
+                if(data.status){
+                    $.each(data.data, function (i, option) {
+                        if(isMultiple){
+                            if(preloaded_id.length && preloaded_id.map(x => x.id).indexOf(`${option.id}`) >= 0)
+                                options += `<option value="${option.id}" selected>${option.nombre}</option>`;
+                            else
+                                options += `<option value="${option.id}">${option.nombre}</option>`;
+                        } else {
+                            if(parseInt(option.id) === parseInt(preloaded_id))
+                                options += `<option value="${option.id}" selected>${option.nombre}</option>`;
+                            else
+                                options += `<option value="${option.id}">${option.nombre}</option>`;
+                        }
+
+                    });
+                }
+                selector.html(options);
+                selector.removeAttr('disabled');
             });
         },
         SweetAlert: function (action, options, route, data, callback) {
@@ -90,16 +98,7 @@ let Cracknd = {
     },
     Datatables: {
         options: function() {
-            return {
-                bStateSave: true,
-                autoWidth: true,
-                processing: true,
-                serverSide: true,
-                paging: true,
-                ordering:  true,
-                lengthMenu: true,
-                lengthChange: true
-            }
+            return {bStateSave: true, autoWidth: true, processing: true, serverSide: true}
         },
         render: function (table, route, options, data = null) {
             let headers = Cracknd.Datatables.getResponsiveHeaders(table);
@@ -109,10 +108,6 @@ let Cracknd = {
                     "autoWidth": options.autoWidth,
                     "processing": options.processing,
                     "serverSide": options.serverSide,
-                    "paging": options.paging,
-                    "ordering": options.ordering,
-                    "lengthMenu": options.lengthMenu,
-                    "lengthChange": options.lengthChange,
                     "ajax": {
                         "url": BASEURL + route, "type": "POST", "dataType": "JSON",
                         "data": function ( d )  {
@@ -123,10 +118,9 @@ let Cracknd = {
                                 obj[name] = $(input).val();
                             });
 
-                            if(data !== null)
-                                obj = {...obj, ...data};
+                            let object = {...obj, ...data};
 
-                            return $.extend({}, d, obj);
+                            return $.extend({}, d, object);
                         }
                     },
                     "language":{"url": "//cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"},
