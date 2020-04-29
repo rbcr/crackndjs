@@ -1,5 +1,5 @@
 <?php
-namespace App\Middleware\Handler;
+namespace Middleware\Handler;
 
 use Cracknd\View;
 use Psr\Http\Message\ResponseInterface;

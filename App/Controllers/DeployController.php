@@ -1,7 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace Controllers;
 
 use \Cartalyst\Sentinel\Native\Facades\Sentinel;
+use Cracknd\Utils;
 use \Illuminate\Database\Capsule\Manager AS DB;
 
 class DeployController{
@@ -10,6 +11,7 @@ class DeployController{
     }
 
     public function init(){
+        Utils::debug();
         switch (ENVIRONMENT){
             case "LOCAL":
             case "DEV":

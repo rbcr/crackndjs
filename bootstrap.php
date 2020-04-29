@@ -1,4 +1,5 @@
 <?php
+    ini_set('display_errors', 1);
     try{
         define('URL_ROOT', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 
