@@ -4,7 +4,6 @@
 
     define('DEBUG', false);
     define('ENVIRONMENT', 'DEV');
-    define('ROUTING_ENABLED', true);
 
     define('URL_PROTOCOL', 'http://');
     define('URL_DOMAIN', $_SERVER['HTTP_HOST']);

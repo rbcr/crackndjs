@@ -7,6 +7,11 @@
         return ASSET_DIRECTORY . $asset;
     }
 
+    function dd($variables){
+        var_dump($variables);
+        die();
+    }
+
     function image($image_path){
         return ASSET_DIRECTORY . "img/$image_path";
     }
